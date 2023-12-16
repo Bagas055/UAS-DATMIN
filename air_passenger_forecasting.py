@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
 df = pd.read_csv('AirPassengers.csv')
-df['Month']=pd.to_datetime(df['Month'], format='%Y-%m')
+df['Month']=pd.to_datetime(df['Month'], format='%Y-%m-%d')
 df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Air Passenger')
