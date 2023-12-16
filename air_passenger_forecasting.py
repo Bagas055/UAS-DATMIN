@@ -10,7 +10,7 @@ df['Month']=pd.to_datetime(df['Month'], format='%Y-%m-%d')
 df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Air Passenger')
-year = st.slider("Tentukan Tahun",1,30, step=1)
+month = st.slider("Tentukan Bulan",1,30, step=1)
 
 # buat DataFrame untuk data yang stasioner
 df_stationary = df.copy()
@@ -27,7 +27,7 @@ del df_stationary ['Passengers_Stationary']
 df_stationary.head()
 
 
-pred = model.forecast(year)
+pred = model.forecast(month)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
 
 if st.button("Predict"):
