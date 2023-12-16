@@ -10,6 +10,8 @@ df = pd.read_csv("AirPassengers.csv")
 df['Month'] = pd.to_datetime(df['Month'])  # Pastikan kolom 'Month' memiliki tipe data datetime
 df.set_index(['Month'], inplace=True)
 
+df['Passengers_Stationary_2'] = pd.to_numeric(df['Passengers_Stationary_2'], errors='coerce')
+
 st.title('Forecasting Air Passengers')
 
 # Ubah slider menjadi memilih jumlah bulan untuk diprediksi
