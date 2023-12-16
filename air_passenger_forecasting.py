@@ -3,26 +3,32 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-model = pickle.load(open('air_passenger_forecasting.sav','rb'))
+model = pickle.load(open('air_passenger_forecasting.sav', 'rb'))
 
-df = pd.read_csv('AirPassengers.csv')
-df['Month']=pd.to_datetime(df['Month'], format='%Y-%m')
+# Ubah sesuai dengan dataset baru yang memiliki kolom 'Month' dan 'Passengers_Stationary_2'
+df = pd.read_csv("AirPassengers.csv")
+df['Month'] = pd.to_datetime(df['Month'])  # Pastikan kolom 'Month' memiliki tipe data datetime
 df.set_index(['Month'], inplace=True)
 
-st.title('Forecasting Air Passenger')
-month = st.slider("Tentukan Bulan",1,30, step=1)
+st.title('Forecasting Air Passengers')
 
-pred = model.forecast(month)
-pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
-pred['Passengers_Stationary_2'] = pd.to_numeric(pred['Passengers_Stationary_2'], errors='coerce')
+# Ubah slider menjadi memilih jumlah bulan untuk diprediksi
+months_to_predict = st.slider("Tentukan Jumlah Bulan untuk Diprediksi", 1, 30, step=1)
 
 if st.button("Predict"):
 
-    col1, col2 = st.columns([2,3])
-    with col1:
-        st.dataframe(pred)
-    with col2:
-        fig, ax = plt.subplots()
-        df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='known')
-        pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
-        st.pyplot(fig)
+    # Lakukan prediksi menggunakan model yang telah diload
+    pred = model.forecast(steps=months_to_predict)
+    pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
+
+    # Tampilkan tabel hasil prediksi
+    st.subheader("Hasil Prediksi")
+    st.write(pred)
+
+    # Buat plot menggunakan Matplotlib dan tampilkan di Streamlit
+    fig, ax = plt.subplots()
+    df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='Known')
+    pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
+    plt.xlabel('Month')
+    plt.ylabel('Passengers_Stationary_2')
+    st.pyplot(fig)
