@@ -24,12 +24,11 @@ del df_stationary ['Passengers']
 del df_stationary ['Passengers_Stationary']
 df_stationary.head()
 
+st.title('Forecasting Air Passenger')
+year = st.slider("Tentukan Tahun",1,30, step=1)
 
 pred = model.forecast(year)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
-
-st.title('Forecasting Air Passenger')
-year = st.slider("Tentukan Tahun",1,30, step=1)
 
 if st.button("Predict"):
 
