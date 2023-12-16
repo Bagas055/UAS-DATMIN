@@ -9,9 +9,6 @@ df = pd.read_csv('AirPassengers.csv')
 df['Month']=pd.to_datetime(df['Month'], format='%Y-%m-%d')
 df.set_index(['Month'], inplace=True)
 
-st.title('Forecasting Air Passenger')
-year = st.slider("Tentukan Tahun",1,30, step=1)
-
 # buat DataFrame untuk data yang stasioner
 df_stationary = df.copy()
 # differencing 1 kali
@@ -29,6 +26,9 @@ df_stationary.head()
 
 pred = model.forecast(year)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
+
+st.title('Forecasting Air Passenger')
+year = st.slider("Tentukan Tahun",1,30, step=1)
 
 if st.button("Predict"):
 
