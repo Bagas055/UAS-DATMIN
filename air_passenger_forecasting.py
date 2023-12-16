@@ -4,12 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-df = pd.read_csv('AirPassengers.csv')
-df['Month']=pd.to_datetime(df['Month'], format='%Y-%m-%d')
-df.set_index(['Month'], inplace=True)
-
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
+df = pd.read_csv('AirPassengers.csv')
+df['Month']=pd.to_datetime(df['Month'], format='%Y-%m')
+df.set_index(['Month'], inplace=True)
 
 # buat DataFrame untuk data yang stasioner
 df_stationary = df.copy()
