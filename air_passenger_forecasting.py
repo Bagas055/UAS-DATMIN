@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime
+from statsmodels.tsa.arima.model import ARIMA
 
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
@@ -30,6 +30,9 @@ year = st.slider("Tentukan Tahun",1,30, step=1)
 pred = model.forecast(year)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
 
+ar = ARIMA(df_stationary, order=(15,1,15)).fit()
+ar_test_pred = ar.forecast(20)
+
 if st.button("Predict"):
 
     col1, col2 = st.columns([2,3])
@@ -38,5 +41,5 @@ if st.button("Predict"):
     with col2:
         fig, ax = plt.subplots()
         df_stationary['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='known')
-        pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
+        ar_test_pred.plot(color='b', legend=True, label='Prediction')
         st.pyplot(fig)
