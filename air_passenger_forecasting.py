@@ -5,27 +5,12 @@ import matplotlib.pyplot as plt
 
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
-df = pd.read_csv('AirPassengers.csv')
+df = pd.read_csv('AirPassengers2.csv')
 df['Month']=pd.to_datetime(df['Month'], format='%Y-%m-%d')
 df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Air Passenger')
 month = st.slider("Tentukan Bulan",1,30, step=1)
-
-# buat DataFrame untuk data yang stasioner
-df_stationary = df.copy()
-# differencing 1 kali
-df_stationary['Passengers_Stationary'] = df_stationary['Passengers'].diff()
-# differencing 2 kali
-df_stationary['Passengers_Stationary_2'] = df_stationary['Passengers'].diff().diff()
-
-# drop baris pertama dan kedua
-df_stationary = df_stationary.dropna()
-
-del df_stationary ['Passengers']
-del df_stationary ['Passengers_Stationary']
-df_stationary.head()
-
 
 pred = model.forecast(month)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
