@@ -14,6 +14,7 @@ month = st.slider("Tentukan Bulan",1,30, step=1)
 
 pred = model.forecast(month)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
+pred['Passengers_Stationary_2'] = pd.to_numeric(pred['Passengers_Stationary_2'], errors='coerce')
 
 if st.button("Predict"):
 
