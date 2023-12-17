@@ -11,18 +11,24 @@ df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
 df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Kualitas Udara')
-year = st.slider("Tentukan Tahun",1,30, step=1)
-
-ar = ARIMA(df, order=(15,1,15)).fit()
-ar_test_pred = ar.forecast(year)
+num_periods = st.slider("Tentukan Jumlah Periode untuk Diprediksi", 1, 30, step=1)
 
 if st.button("Predict"):
+    # Assuming 'Passengers_Stationary_2' is the column you want to forecast
+    endog_data = df['Passengers_Stationary_2']
 
-    col1, col2 = st.columns([2,3])
-    with col1:
-        st.dataframe(ar)
-    with col2:
-        fig, ax = plt.subplots()
-        df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='known')
-        pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
-        st.pyplot(fig)
+    # Fit ARIMA model
+    arima_model = ARIMA(endog_data, order=(15, 1, 15))
+    arima_result = arima_model.fit()
+
+    # Make ARIMA forecast
+    arima_forecast = arima_result.forecast(steps=num_periods)
+
+    # Plotting known and predicted values
+    fig, ax = plt.subplots()
+    endog_data.plot(style='--', color='gray', legend=True, label='Known')
+    ax.plot(arima_forecast, color='b', label='Prediction')
+    plt.legend()
+    plt.xlabel('Time')
+    plt.ylabel('Passengers_Stationary_2')
+    st.pyplot(fig)
