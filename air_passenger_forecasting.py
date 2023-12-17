@@ -13,7 +13,7 @@ st.title('Forecasting Air Passenger')
 year = st.slider("Tentukan Tahun",1,30, step=1)
 
 pred = model.forecast(year)
-pred = pd.DataFrame(pred, columns=['CO2'])
+pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
 
 if st.button("Predict"):
 
