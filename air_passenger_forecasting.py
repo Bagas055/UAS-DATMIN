@@ -24,4 +24,3 @@ if st.button("Predict"):
         fig, ax = plt.subplots()
         df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='known')
         pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
-        st.pyplot(fig)
