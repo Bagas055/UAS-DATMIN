@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
 df = pd.read_csv("AirPassengers.csv")
-df['Year'] = pd.to_datetime(df['Passengers_Stationary_2'], format='%Y-%m')
-df.set_index(['Passengers_Stationary_2'], inplace=True)
+df['Year'] = pd.to_datetime(df['Month'], format='%Y-%m')
+df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Air Passenger')
 year = st.slider("Tentukan Tahun",1,30, step=1)
