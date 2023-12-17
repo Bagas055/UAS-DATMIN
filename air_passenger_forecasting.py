@@ -13,7 +13,7 @@ df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
 df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Air Passenger')
-year = st.slider("Tentukan Tahun", 1, 30, step=1)
+year = st.slider("Tentukan Bulan", 1, 30, step=1)
 
 # Fit ARIMA model
 ar = ARIMA(df, order=(15, 1, 15)).fit()
