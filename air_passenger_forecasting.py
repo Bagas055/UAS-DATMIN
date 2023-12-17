@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 
-model = pickle.load(open('air_passenger_forecasting.sav','rb'))
+model = pickle.load(open('air_passenger_forecasting.sav', 'rb'))
 
 df = pd.read_csv("AirPassenger2.csv")
 df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
@@ -27,7 +27,7 @@ if st.button("Predict"):
     # Plotting known and predicted values
     fig, ax = plt.subplots()
     endog_data.plot(style='--', color='gray', legend=True, label='Known')
-    ax.plot(arima_forecast, color='b', label='Prediction')
+    ax.plot(arima_forecast.index, arima_forecast.values, color='b', label='Prediction')
     plt.legend()
     plt.xlabel('Time')
     plt.ylabel('Passengers_Stationary_2')
