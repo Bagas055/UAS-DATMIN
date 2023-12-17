@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 
 # Load the stationary dataset (df_stationary)
-df_stationary = pd.read_csv("your_stationary_dataset.csv")
+df_stationary = pd.read_csv("AirPassenger2.csv")
 # Assuming 'Passengers_Stationary_2' is the column containing the stationary data
 
 st.title('ARIMA Forecasting')
