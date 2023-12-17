@@ -13,7 +13,7 @@ st.title('Forecasting Air Passenger')
 year = st.slider("Tentukan Tahun",1,30, step=1)
 
 pred = model.forecast(year)
-pred = pd.DataFrame(pred, columns=['Month'])
+pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
 
 if st.button("Predict"):
 
@@ -24,3 +24,4 @@ if st.button("Predict"):
         fig, ax = plt.subplots()
         df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='known')
         pred['Passengers_Stationary_2'].plot(color='b', legend=True, label='Prediction')
+        st.pyplot(fig)        
