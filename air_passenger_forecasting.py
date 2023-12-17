@@ -17,8 +17,8 @@ ar = ARIMA(df_stationary, order=(15,1,15)).fit()
 ar_train_pred = ar.fittedvalues
 ar_test_pred = ar.forecast(year)
 
-train_df_stationary = df_stationary.loc[:'1949-03']
-test_df_stationary = df_stationary.loc['1949-04':]
+train_df = df.loc[:'1949-03']
+test_df = df.loc['1949-04':]
 
 pred = model.forecast(year)
 pred = pd.DataFrame(pred, columns=['Passengers_Stationary_2'])
@@ -30,7 +30,7 @@ if st.button("Predict"):
         st.dataframe(pred)
     with col2:
         fig, ax = plt.subplots()
-        train_df_stationary['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='train_df')
-        test_df_stationary['Passengers_Stationary_2'].plot(style='--', color='r', legend=True, label='test_df')
+        train_df['Passengers_Stationary_2'].plot(style='--', color='gray', legend=True, label='train_df')
+        test_df['Passengers_Stationary_2'].plot(style='--', color='r', legend=True, label='test_df')
         ar_test_pred.plot(color='b', legend=True, label='Prediction')
         st.pyplot(fig)
