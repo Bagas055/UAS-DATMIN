@@ -7,7 +7,7 @@ model = pickle.load(open('air_passenger_forecasting.sav','rb'))
 
 df = pd.read_csv("AirPassenger2.csv")
 df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
-df.set_index(['month'], inplace=True)
+df.set_index(['Month'], inplace=True)
 
 st.title('Forecasting Kualitas Udara')
 year = st.slider("Tentukan Tahun",1,30, step=1)
