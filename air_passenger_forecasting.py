@@ -26,8 +26,8 @@ if st.button("Predict"):
 
     # Plotting known and predicted values
     fig, ax = plt.subplots()
-    endog_data.plot(style='--', color='gray', legend=True, label='Known')
-    ax.plot(arima_forecast.index, arima_forecast.values, color='b', label='Prediction')
+    endog_data.plot(style='--', color='b', legend=True, label='Known')
+    ax.plot(arima_forecast.index, arima_forecast.values, color='red', label='Prediction')
     plt.legend()
     plt.xlabel('Time')
     plt.ylabel('Passengers_Stationary_2')
