@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
+from statsmodels.tsa.arima.model import ARIMA
 import matplotlib.pyplot as plt
 
 model = pickle.load(open('air_passenger_forecasting.sav','rb'))
