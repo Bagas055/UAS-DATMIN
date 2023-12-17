@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 model = pickle.load(open('air_passenger_forecasting.sav', 'rb'))
 
 # Load the dataset
-df = pd.read_csv("AirPassenger2.csv")
+df = pd.read_csv("AirPassengers.csv")
 df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
 df.set_index(['Month'], inplace=True)
 
