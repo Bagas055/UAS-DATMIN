@@ -13,7 +13,7 @@ df.set_index(['Month'], inplace=True)
 st.title('Forecasting Kualitas Udara')
 year = st.slider("Tentukan Tahun",1,30, step=1)
 
-ar = ARIMA(df_stationary, order=(15,1,15)).fit()
+ar = ARIMA(df, order=(15,1,15)).fit()
 ar_test_pred = ar.forecast(year)
 
 if st.button("Predict"):
